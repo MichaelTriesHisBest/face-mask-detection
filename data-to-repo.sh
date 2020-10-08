@@ -11,8 +11,8 @@ ANNOTATIONS_DEST=/Users/brtonnies/ArtificialIntelligence/face-mask-detection/dat
 # do images, 100 at a time
 cd $IMAGES || null
 NUM_IMAGES=$(find $IMAGES -type f | wc -l)
-START=1079
-END=1179
+START=1413
+END=1513
 
 while [[ $END -lt $NUM_IMAGES ]]; do
   echo "Start At File # $START"
