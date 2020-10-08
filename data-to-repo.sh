@@ -67,7 +67,7 @@ while [[ $END -lt $NUM_ANNOT ]]; do
   echo "End At File # $END"
   for n in {$START..$END}; do
 
-    cd $IMAGES || null
+    cd $ANNOTATIONS || null
     if [[ $n -lt 10 ]]; then
       ZEROES="000"
     elif [[ $n -lt 100 ]]; then
@@ -88,17 +88,17 @@ while [[ $END -lt $NUM_ANNOT ]]; do
 
   cd $PROJ_ROOT || null
   git add .
-  git commit -am "adding images $START -> $END to repository"
+  git commit -am "adding annotations $START -> $END to repository"
   git push -u origin main
 
   if [[ ${END+100} -gt $NUM_ANNOT ]]; then
-    END=$NUM_IMAGES
+    END=$NUM_ANNOT
   else
     END=$((END+100))
   fi
 
   if [[ ${START+100} -gt $NUM_ANNOT ]]; then
-    START=$NUM_IMAGES
+    START=$NUM_ANNOT
   else
     START=$((START+100))
   fi
