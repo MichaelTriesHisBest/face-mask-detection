@@ -70,7 +70,7 @@ while [[ $END -lt $NUM_ANNOT ]]; do
 
     f=$(find $ANNOTATIONS -type f -name "$n\.*")
     echo $f
-    fpath="$ANNOTATIONS/${f:2}"
+    fpath="$f"
     dest="$ANNOTATIONS_DEST/${f:2}"
     if [[ -f "$fpath" ]]; then
       cp "$fpath" "$dest"
