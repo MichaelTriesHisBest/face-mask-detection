@@ -86,12 +86,12 @@ while [[ $END -lt $NUM_ANNOT ]]; do
   if [[ ${END+100} -gt $NUM_ANNOT ]]; then
     END=$NUM_ANNOT
   else
-    END=$((END+100))
+    END=$((END+200))
   fi
 
   if [[ ${START+100} -gt $NUM_ANNOT ]]; then
     START=$NUM_ANNOT
   else
-    START=$((START+100))
+    START=$((START+200))
   fi
 done
