@@ -39,7 +39,7 @@ while [[ $END -lt $NUM_IMAGES ]]; do
   done
 
   cd $PROJ_ROOT || null
-#  git add .
+  git add .
   git commit -am "adding images $START -> $END to repository"
   git push --set-upstream origin master
 
