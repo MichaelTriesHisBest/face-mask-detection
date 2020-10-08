@@ -41,7 +41,7 @@ while [[ $END -lt $NUM_IMAGES ]]; do
   cd $PROJ_ROOT || null
   git add .
   git commit -am "adding images $START -> $END to repository"
-  git push --set-upstream origin master
+  git push -u origin main
 
   if [[ ${END+100} -gt $NUM_IMAGES ]]; then
     END=$NUM_IMAGES
