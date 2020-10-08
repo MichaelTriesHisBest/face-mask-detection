@@ -57,3 +57,49 @@ while [[ $END -lt $NUM_IMAGES ]]; do
 done
 
 cd $PROJ_ROOT || null
+cd $ANNOTATIONS || null
+NUM_ANNOT=$(find $ANNOTATIONS -type f | wc -l)
+START=1413
+END=1513
+
+while [[ $END -lt $NUM_ANNOT ]]; do
+  echo "Start At File # $START"
+  echo "End At File # $END"
+  for n in {$START..$END}; do
+
+    cd $IMAGES || null
+    if [[ $n -lt 10 ]]; then
+      ZEROES="000"
+    elif [[ $n -lt 100 ]]; then
+      ZEROES="00"
+    elif [[ $n -lt 1000 ]]; then
+      ZEROES="0"
+    else
+      ZEROES=""
+    fi
+
+    f=$(find . -type f -name "$ZEROES$n\.*")
+    fpath="$IMAGES/${f:2}"
+    dest="$IMAGES_DEST/${f:2}"
+    if [[ -f "$fpath" ]]; then
+      cp "$fpath" "$dest"
+    fi
+  done
+
+  cd $PROJ_ROOT || null
+  git add .
+  git commit -am "adding images $START -> $END to repository"
+  git push -u origin main
+
+  if [[ ${END+100} -gt $NUM_ANNOT ]]; then
+    END=$NUM_IMAGES
+  else
+    END=$((END+100))
+  fi
+
+  if [[ ${START+100} -gt $NUM_ANNOT ]]; then
+    START=$NUM_IMAGES
+  else
+    START=$((START+100))
+  fi
+done
