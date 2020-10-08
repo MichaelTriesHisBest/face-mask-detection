@@ -59,7 +59,7 @@ ANNOTATIONS_DEST=/Users/brtonnies/ArtificialIntelligence/face-mask-detection/dat
 #cd $PROJ_ROOT || null
 cd $ANNOTATIONS || null
 NUM_ANNOT=$(find $ANNOTATIONS -type f | wc -l)
-NUM_ANNOT=$((NUM_ANNOT+1801))
+NUM_ANNOT=$((NUM_ANNOT + 1801))
 START=1801
 END=1901
 
@@ -71,7 +71,7 @@ while [[ $END -lt $NUM_ANNOT ]]; do
     cd $ANNOTATIONS
     f=$(find . -type f -name "$n\.*")
     echo $f
-    fpath="$ANNOTATIONS/$f"
+    fpath="$ANNOTATIONS/${f}"
     dest="$ANNOTATIONS_DEST/${f:2}"
     if [[ -f "$fpath" ]]; then
       cp "$fpath" "$dest"
@@ -83,15 +83,15 @@ while [[ $END -lt $NUM_ANNOT ]]; do
   git commit -am "adding annotations $START -> $END to repository"
   git push -u origin main
 
-  if [[ $((END+100)) -gt $NUM_ANNOT ]]; then
+  if [[ $((END + 100)) -gt $NUM_ANNOT ]]; then
     END=$NUM_ANNOT
   else
-    END=$((END+100))
+    END=$((END + 100))
   fi
 
-  if [[ $((START+100)) -gt $NUM_ANNOT ]]; then
+  if [[ $((START + 100)) -gt $NUM_ANNOT ]]; then
     START=$NUM_ANNOT
   else
-    START=$((START+100))
+    START=$((START + 100))
   fi
 done
