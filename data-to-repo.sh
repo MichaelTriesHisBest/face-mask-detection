@@ -11,8 +11,8 @@ ANNOTATIONS_DEST=/Users/brtonnies/ArtificialIntelligence/face-mask-detection/dat
 # do images, 100 at a time
 cd $IMAGES || null
 NUM_IMAGES=$(find $IMAGES -type f | wc -l)
-START=233
-END=333
+START=433
+END=533
 
 while [[ $END -le $NUM_IMAGES ]]; do
   echo "Start At File # $START"
@@ -38,7 +38,7 @@ while [[ $END -le $NUM_IMAGES ]]; do
 
   $(git add .)
   $(git commit -am "adding images $START -> $END to repository")
-  $(git push)
+  $(git push --set-upstream origin master)
 
   if [[ ${END+100} -gt $NUM_IMAGES ]]; then
     END=$NUM_IMAGES
