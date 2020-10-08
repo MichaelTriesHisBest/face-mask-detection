@@ -69,6 +69,7 @@ while [[ $END -lt $NUM_ANNOT ]]; do
   for n in {$START..$END}; do
 
     f=$(find $ANNOTATIONS -type f -name "$n\.*")
+    echo $f
     fpath="$ANNOTATIONS/${f:2}"
     dest="$ANNOTATIONS_DEST/${f:2}"
     if [[ -f "$fpath" ]]; then
@@ -81,15 +82,15 @@ while [[ $END -lt $NUM_ANNOT ]]; do
   git commit -am "adding annotations $START -> $END to repository"
   git push -u origin main
 
-  if [[ ${END+100} -gt $NUM_ANNOT ]]; then
+  if [[ $((END+100)) -gt $NUM_ANNOT ]]; then
     END=$NUM_ANNOT
   else
-    END=$((END+200))
+    END=$((END+100))
   fi
 
-  if [[ ${START+100} -gt $NUM_ANNOT ]]; then
+  if [[ $((START+100)) -gt $NUM_ANNOT ]]; then
     START=$NUM_ANNOT
   else
-    START=$((START+200))
+    START=$((START+100))
   fi
 done
