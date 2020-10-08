@@ -68,9 +68,10 @@ while [[ $END -lt $NUM_ANNOT ]]; do
   echo "End At File # $END"
   for n in {$START..$END}; do
 
-    f=$(find $ANNOTATIONS -type f -name "$n\.*")
+    cd $ANNOTATIONS
+    f=$(find . -type f -name "$n\.*")
     echo $f
-    fpath="$f"
+    fpath="$ANNOTATIONS/$f"
     dest="$ANNOTATIONS_DEST/${f:2}"
     if [[ -f "$fpath" ]]; then
       cp "$fpath" "$dest"
