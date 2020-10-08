@@ -59,6 +59,7 @@ done
 #cd $PROJ_ROOT || null
 cd $ANNOTATIONS || null
 NUM_ANNOT=$(find $ANNOTATIONS -type f | wc -l)
+NUM_ANNOT=$((NUM_ANNOT+1801))
 START=1801
 END=1901
 
