@@ -11,8 +11,8 @@ ANNOTATIONS_DEST=/Users/brtonnies/ArtificialIntelligence/face-mask-detection/dat
 # do images, 100 at a time
 cd $IMAGES || null
 NUM_IMAGES=$(find $IMAGES -type f | wc -l)
-START=1413
-END=1513
+START=3570
+END=3570
 
 while [[ $END -lt $NUM_IMAGES ]]; do
   echo "Start At File # $START"
@@ -56,11 +56,11 @@ while [[ $END -lt $NUM_IMAGES ]]; do
   fi
 done
 
-cd $PROJ_ROOT || null
+#cd $PROJ_ROOT || null
 cd $ANNOTATIONS || null
 NUM_ANNOT=$(find $ANNOTATIONS -type f | wc -l)
-START=1413
-END=1513
+START=1801
+END=1901
 
 while [[ $END -lt $NUM_ANNOT ]]; do
   echo "Start At File # $START"
@@ -68,17 +68,8 @@ while [[ $END -lt $NUM_ANNOT ]]; do
   for n in {$START..$END}; do
 
     cd $ANNOTATIONS || null
-    if [[ $n -lt 10 ]]; then
-      ZEROES="000"
-    elif [[ $n -lt 100 ]]; then
-      ZEROES="00"
-    elif [[ $n -lt 1000 ]]; then
-      ZEROES="0"
-    else
-      ZEROES=""
-    fi
 
-    f=$(find . -type f -name "$ZEROES$n\.*")
+    f=$(find . -type f -name "$n\.*")
     fpath="$IMAGES/${f:2}"
     dest="$IMAGES_DEST/${f:2}"
     if [[ -f "$fpath" ]]; then
