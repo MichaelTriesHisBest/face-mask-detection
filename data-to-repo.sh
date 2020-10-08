@@ -71,8 +71,8 @@ while [[ $END -lt $NUM_ANNOT ]]; do
     cd $ANNOTATIONS || null
 
     f=$(find . -type f -name "$n\.*")
-    fpath="$IMAGES/${f:2}"
-    dest="$IMAGES_DEST/${f:2}"
+    fpath="$ANNOTATIONS_DEST/${f:2}"
+    dest="$ANNOTATIONS_DEST/${f:2}"
     if [[ -f "$fpath" ]]; then
       cp "$fpath" "$dest"
     fi
