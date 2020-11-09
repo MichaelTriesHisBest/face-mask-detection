@@ -9,7 +9,7 @@ IMAGES_DEST=/Users/brtonnies/ArtificialIntelligence/face-mask-detection/data/ima
 ANNOTATIONS=/Users/brtonnies/ArtificialIntelligence/face-mask-detection/data/annotations
 ANNOTATIONS_DEST=/Users/brtonnies/ArtificialIntelligence/face-mask-detection/data/annotations
 
-CMFD_ROOT=/Users/brtonnies/ArtificialIntelligence/face-mask-detection/data/images/CMFD
+CMFD_ROOT=/Users/brtonnies/ArtificialIntelligence/face-mask-detection/data/images/IMFD
 CMFD_IMAGES_ROOT="$CMFD_ROOT/images"
 CMFD_ERROR_ROOT="$CMFD_ROOT/error"
 
@@ -27,7 +27,7 @@ cd $OLD_IMG_DIR || null
 
 
 NUM_IMAGES=$(find $OLD_IMG_DIR -type f | wc -l)
-START=9992
+START=0
 END=$((START + 100))
 
 
@@ -58,7 +58,7 @@ while [[ $END -lt $NUM_IMAGES ]]; do
 
 #      echo "Checking for file name $ZEROES$n\_Mask"
 
-      f=$(find . -type f -name "$ZEROES$n\_Mask\.*")
+      f=$(find . -type f -name "$ZEROES$n\_Mask*\.*")
       fpath="$OLD_IMG_DIR/${f:2}"
       dest="$CMFD_IMAGES_ROOT/${f:2}"
 #      echo "$fpath"
@@ -75,7 +75,7 @@ while [[ $END -lt $NUM_IMAGES ]]; do
     cd $PROJ_ROOT || null
 #    echo "Would add images $START -> $END to repository"
     git add .
-    git commit -am "adding CMFD images $START -> $END to repository"
+    git commit -am "adding IMFD images $START -> $END to repository"
     git push -u origin main
 
     if [[ ${END+100} -gt $NUM_IMAGES ]]; then
