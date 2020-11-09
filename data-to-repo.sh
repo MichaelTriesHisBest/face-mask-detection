@@ -27,7 +27,7 @@ cd $OLD_IMG_DIR || null
 
 
 NUM_IMAGES=$(find $OLD_IMG_DIR -type f | wc -l)
-START=6291
+START=9992
 END=$((START + 100))
 
 
