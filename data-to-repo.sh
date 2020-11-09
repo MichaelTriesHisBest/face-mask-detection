@@ -65,7 +65,7 @@ while [[ $END -lt $NUM_IMAGES ]]; do
 #      echo "$dest"
       if [[ -f "$fpath" ]]; then
         cp "$fpath" "$dest"
-        echo "would copy $fpath to $dest"
+#        echo "would copy $fpath to $dest"
       fi
     done
 #            done
