@@ -27,7 +27,7 @@ cd $OLD_IMG_DIR || null
 
 
 NUM_IMAGES=$(find $OLD_IMG_DIR -type f | wc -l)
-START=4153
+START=6291
 END=$((START + 100))
 
 
@@ -65,7 +65,7 @@ while [[ $END -lt $NUM_IMAGES ]]; do
 #      echo "$dest"
       if [[ -f "$fpath" ]]; then
         cp "$fpath" "$dest"
-#        echo "would copy $fpath to $dest"
+        echo "would copy $fpath to $dest"
       fi
     done
 #            done
