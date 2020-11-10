@@ -94,7 +94,7 @@ def add_bboxes(df):
 
 
 def main():
-mtcnn = MTCNN()
+    mtcnn = MTCNN()
     # images = get_images()
     # annotations = get_annotations()
     # images.sort()
@@ -109,34 +109,34 @@ mtcnn = MTCNN()
     # train().to_csv(os.path.join(DATA_DIR, 'img_data', 'kaggle_training.csv'))
 
     # process and write the image data set to a file for easier access
-data = list()
-df = list()
+    data = list()
+    df = list()
 
-done = list(set([item[0] for item in data]))
-imfd_images = [img for img in imfd_images if img not in done]
-for image in imfd_images:
-    img = plt.imread(os.path.join(IMFD_IMAGES_DIR, image))
-    print("Analyzing image '{}' (#{}/{})".format(
-        image,
-        imfd_images.index(image)+1,
-        len(imfd_images)
-    ))
-    faces = mtcnn.detect_faces(img)
-    if not faces:
-        print("\tNo faces detected.")
-    else:
-        t = list()
-        for face in faces:
-            print("\tFinding bounds for {}/{} faces...".format(
-                faces.index(face)+1,
-                len(faces)
-            ))
-            bbox = face['box']
-            data.append([image, bbox])
-        df.append(t)
+    done = list(set([item[0] for item in data]))
+    imfd_images = [img for img in imfd_images if img not in done]
+    for image in imfd_images:
+        img = plt.imread(os.path.join(IMFD_IMAGES_DIR, image))
+        print("Analyzing image '{}' (#{}/{})".format(
+            image,
+            imfd_images.index(image)+1,
+            len(imfd_images)
+        ))
+        faces = mtcnn.detect_faces(img)
+        if not faces:
+            print("\tNo faces detected.")
+        else:
+            t = list()
+            for face in faces:
+                print("\tFinding bounds for {}/{} faces...".format(
+                    faces.index(face)+1,
+                    len(faces)
+                ))
+                bbox = face['box']
+                data.append([image, bbox])
+            df.append(t)
 
-data += [i for i in df if len(i) == 1]
-data += [[j for j in i] for i in df if len(i) > 1]
+    data += [i for i in df if len(i) == 1]
+    data += [[j for j in i] for i in df if len(i) > 1]
 
     # neg = list()
     # for i in data:
@@ -178,18 +178,18 @@ data += [[j for j in i] for i in df if len(i) > 1]
 
     # print(data)
 
-dframe = pd.DataFrame(
-    # data=data,
-    # columns=['name', 'x1', 'x2', 'y1', 'y2', 'classname']
-)
-dframe['name'] = [i[0] for i in data]
-dframe['x1'] = [i[1][0] for i in data]
-dframe['x2'] = [i[1][1] for i in data]
-dframe['y1'] = [i[1][2] for i in data]
-dframe['y2'] = [i[1][3] for i in data]
-dframe['classname'] = ["face_mask_incorrect" for i in data]
-print(dframe)
-dframe.to_csv(os.path.join(DATA_DIR, 'img_data', 'cmfd_training.csv'))
+    dframe = pd.DataFrame(
+        # data=data,
+        # columns=['name', 'x1', 'x2', 'y1', 'y2', 'classname']
+    )
+    dframe['name'] = [i[0] for i in data]
+    dframe['x1'] = [i[1][0] for i in data]
+    dframe['x2'] = [i[1][1] for i in data]
+    dframe['y1'] = [i[1][2] for i in data]
+    dframe['y2'] = [i[1][3] for i in data]
+    dframe['classname'] = ["face_mask_correct" for i in data]
+    print(dframe)
+    dframe.to_csv(os.path.join(DATA_DIR, 'img_data', 'cmfd_training.csv'))
 
 
 main()
