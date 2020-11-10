@@ -13,7 +13,6 @@ import matplotlib.patches as patches
 # from sklearn.preprocessing import LabelEncoder
 from mtcnn.mtcnn import MTCNN
 
-
 ROOT_DIR = '/Users/brtonnies/ArtificialIntelligence/face-mask-detection'
 DATA_DIR = os.path.join(ROOT_DIR, 'data')
 IMAGES_DIR = os.path.join(DATA_DIR, 'images')
@@ -26,6 +25,7 @@ OUTPUT_DIR = os.path.join(DATA_DIR, 'img_data')
 image_formats = ['jpg', 'jpeg', 'png']
 cmfd_images = [img for img in os.listdir(CMFD_IMAGES_DIR) if img.split(".")[-1] in image_formats]
 imfd_images = [img for img in os.listdir(IMFD_IMAGES_DIR) if img.split(".")[-1] in image_formats]
+
 
 # "_".join(i.split("_")[1:]).split(".")[0].lower()  # <-- gets a lowercase string for the way that a mask is worn incorrectly
 
@@ -112,14 +112,15 @@ def main():
     data = list()
     df = list()
 
-    for image in cmfd_images:
-        img = plt.imread(os.path.join(CMFD_IMAGES_DIR, image))
+    done = list(set([item[0] for item in data]))
+    imfd_images = [img for img in imfd_images if img not in done]
+    for image in imfd_images:
+        img = plt.imread(os.path.join(IMFD_IMAGES_DIR, image))
         print("Analyzing image '{}' (#{}/{})".format(
             image,
-            cmfd_images.index(image)+1,
-            len(cmfd_images)
+            imfd_images.index(image)+1,
+            len(imfd_images)
         ))
-
         faces = mtcnn.detect_faces(img)
         if not faces:
             print("\tNo faces detected.")
