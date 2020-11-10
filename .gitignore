@@ -3,3 +3,5 @@
 .data-to-repo.sh
 
 */__pycache__/*
+
+**/images

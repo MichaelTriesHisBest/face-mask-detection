@@ -17,8 +17,18 @@ from mtcnn.mtcnn import MTCNN
 ROOT_DIR = '/Users/brtonnies/ArtificialIntelligence/face-mask-detection'
 DATA_DIR = os.path.join(ROOT_DIR, 'data')
 IMAGES_DIR = os.path.join(DATA_DIR, 'images')
+CMFD_IMAGES_DIR = os.path.join(IMAGES_DIR, 'CMFD/images')
+IMFD_IMAGES_DIR = os.path.join(IMAGES_DIR, 'IMFD/images')
 ANNOTATIONS_DIR = os.path.join(DATA_DIR, 'annotations')
 OUTPUT_DIR = os.path.join(DATA_DIR, 'img_data')
+
+
+image_formats = ['jpg', 'jpeg', 'png']
+cmfd_images = [img for img in os.listdir(CMFD_IMAGES_DIR) if img.split(".")[-1] in image_formats]
+imfd_images = [img for img in os.listdir(IMFD_IMAGES_DIR) if img.split(".")[-1] in image_formats]
+
+# "_".join(i.split("_")[1:]).split(".")[0].lower()  # <-- gets a lowercase string for the way that a mask is worn incorrectly
+
 
 
 def train():
@@ -85,29 +95,29 @@ def add_bboxes(df):
 
 def main():
     mtcnn = MTCNN()
-    images = get_images()
-    annotations = get_annotations()
-    images.sort()
-    annotations.sort()
+    # images = get_images()
+    # annotations = get_annotations()
+    # images.sort()
+    # annotations.sort()
 
-    train_images = images[1698:]
-    test_images = images[:1698]
+    # train_images = images[1698:]
+    # test_images = images[:1698]
 
     # process and write the training set
     # train_df = add_bboxes(train())
-    # print(os.path.join(DATA_DIR, 'img_data', 'training.csv'))
-    # train().to_csv(os.path.join(DATA_DIR, 'img_data', 'training.csv'))
+    # print(os.path.join(DATA_DIR, 'img_data', 'kaggle_training.csv'))
+    # train().to_csv(os.path.join(DATA_DIR, 'img_data', 'kaggle_training.csv'))
 
     # process and write the image data set to a file for easier access
     data = list()
     df = list()
 
-    for image in test_images:
-        img = plt.imread(os.path.join(IMAGES_DIR, image))
+    for image in cmfd_images:
+        img = plt.imread(os.path.join(CMFD_IMAGES_DIR, image))
         print("Analyzing image '{}' (#{}/{})".format(
             image,
-            test_images.index(image)+1,
-            len(test_images)
+            cmfd_images.index(image)+1,
+            len(cmfd_images)
         ))
 
         faces = mtcnn.detect_faces(img)
@@ -176,9 +186,9 @@ def main():
     dframe['x2'] = [i[1][1] for i in data]
     dframe['y1'] = [i[1][2] for i in data]
     dframe['y2'] = [i[1][3] for i in data]
-    dframe['classname'] = [None for i in data]
+    dframe['classname'] = ["face_mask_correct" for i in data]
     print(dframe)
-    dframe.to_csv(os.path.join(DATA_DIR, 'img_data', 'not_classified.csv'))
+    dframe.to_csv(os.path.join(DATA_DIR, 'img_data', 'cmfd_training.csv'))
 
 
 main()
