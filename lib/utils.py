@@ -5,10 +5,10 @@ import numpy as np
 import matplotlib.pyplot as plt
 import validators
 from pathlib import Path
-
-KAGGLE_DIR_GIT = "https://github.com/brtonnies/face-mask-detection/blob/main/data/images"
-CMFD_DIR_GIT = "https://github.com/brtonnies/face-mask-detection/blob/main/data/images/CMFD/images"
-IMFD_DIR_GIT = "https://github.com/brtonnies/face-mask-detection/blob/main/data/images/IMFD/images"
+# https://github.com/brtonnies/face-mask-detection/blob/data-branch/data/images/0001.jpg?raw=true
+KAGGLE_DIR_GIT = "https://github.com/brtonnies/face-mask-detection/blob/data-branch/data/images"
+CMFD_DIR_GIT = "https://github.com/brtonnies/face-mask-detection/blob/data-branch/data/images/CMFD/images"
+IMFD_DIR_GIT = "https://github.com/brtonnies/face-mask-detection/blob/data-branch/data/images/IMFD/images"
 
 ROOT_DIR = Path(os.getcwd()).parent()
 DATA_DIR = os.path.join(ROOT_DIR, 'data')
