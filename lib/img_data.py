@@ -113,7 +113,7 @@ def main():
     df = list()
 
     done = list(set([item[0] for item in data]))
-    imfd_images = [img for img in imfd_images if img not in done]
+    imfd_images = [img for img in cmfd_images if img not in done]
     for image in imfd_images:
         img = plt.imread(os.path.join(IMFD_IMAGES_DIR, image))
         print("Analyzing image '{}' (#{}/{})".format(
