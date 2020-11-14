@@ -6,11 +6,6 @@ import matplotlib.pyplot as plt
 import validators
 import pathlib
 from pathlib import Path
-# https://github.com/brtonnies/face-mask-detection/blob/data-branch/data/images/0001.jpg?raw=true
-# https://raw.githubusercontent.com/brtonnies/face-mask-detection/data-branch/data/images/1801.jpg
-KAGGLE_DIR_GIT = "https://github.com/brtonnies/face-mask-detection/data-branch/data/images" # "https://github.com/brtonnies/face-mask-detection/blob/data-branch/data/images"
-CMFD_DIR_GIT = "https://github.com/brtonnies/face-mask-detection/blob/data-branch/data/images/CMFD/images"
-IMFD_DIR_GIT = "https://github.com/brtonnies/face-mask-detection/blob/data-branch/data/images/IMFD/images"
 
 CURR_DIR = os.getcwd()
 os.chdir("..")
@@ -20,9 +15,17 @@ DATA_DIR = os.path.join(ROOT_DIR, 'data')
 IMAGES_DIR = os.path.join(DATA_DIR, 'images')
 ANNOTATIONS_DIR = os.path.join(DATA_DIR, 'annotations')
 SUB_IMAGES_DIR = os.path.join(IMAGES_DIR, 'sub')
+# PRAJNA_DATASET
 
+# REPOSITORY IMAGE LOCATIONS
+# https://github.com/brtonnies/face-mask-detection/blob/data-branch/data/images/0001.jpg?raw=true
+# https://raw.githubusercontent.com/brtonnies/face-mask-detection/data-branch/data/images/1801.jpg
+KAGGLE_DIR_GIT = "https://github.com/brtonnies/face-mask-detection/data-branch/data/images"
+CMFD_DIR_GIT = "https://github.com/brtonnies/face-mask-detection/blob/data-branch/data/images/CMFD/images"
+IMFD_DIR_GIT = "https://github.com/brtonnies/face-mask-detection/blob/data-branch/data/images/IMFD/images"
 
 def get_image(name, source='kaggle', options=None):
+    name = "{}?raw=true".format(name)
     if source.lower() in ['kaggle', 'kagg', 'kag']:
         source_url = KAGGLE_DIR_GIT
     elif source.lower() in 'cmfd':
